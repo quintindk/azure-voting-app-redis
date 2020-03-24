@@ -1,0 +1,41 @@
+apiVersion: 2018-10-01
+location: westeurope
+name: azure-vote-group
+properties:
+  containers:
+  - name: azure-vote-back
+    properties:
+      image: redis
+      resources:
+        requests:
+          cpu: 1
+          memoryInGb: 1.5
+      ports:
+      - port: 6379
+  - name: azure-vote-front
+    properties:
+      image: acrdevvotedemo.azurecr.io/azure-vote-front:v1
+      resources:
+        requests:
+          cpu: 1
+          memoryInGb: 1.5
+      ports:
+      - port: 80
+      - port: 8080
+      environmentVariables:
+        - name: 'REDIS'
+          value: '127.0.0.1'
+  osType: Linux
+  ipAddress:
+    type: Public
+    ports:
+    - protocol: tcp
+      port: '80'
+    - protocol: tcp
+      port: '8080'
+  imageRegistryCredentials:
+  - server: acrdevvotedemo.azurecr.io
+    username: acrdevvotedemo
+    password: g5farL2ba/k4m1SDnmAHftCX4K82qNP6
+tags: null
+type: Microsoft.ContainerInstance/containerGroups
