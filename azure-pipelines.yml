@@ -14,7 +14,7 @@ stages:
     - task: Docker@2
       displayName: "Build and Push Container"
       inputs:
-        containerRegistry: 'Quintin Demo Registry'
+        containerRegistry: 'Quintin Container Registry'
         repository: 'azure-vote-front'
         command: 'buildAndPush'
         Dockerfile: '$(System.DefaultWorkingDirectory)/azure-vote/Dockerfile'
